@@ -1,6 +1,5 @@
 const AWS = require("aws-sdk");
 const handler = require("../src/lambdas/getReviews").handler;
-const Review = require("../src/model/Review");
 
 jest.mock("aws-sdk", () => {
   const mockScan = jest.fn();
@@ -22,7 +21,7 @@ describe("getReviews handler", () => {
           Items: [
             {
               id: "1",
-              películaTítulo: "Star Wars: Episode IV - A New Hope",
+              películaTítulo: "A New Hope",
               texto: "A classic",
               título: "A classic",
               calificación: 5,
@@ -31,7 +30,7 @@ describe("getReviews handler", () => {
             },
             {
               id: "2",
-              películaTítulo: "Star Wars: Episode V - The Empire Strikes Back",
+              películaTítulo: "The Empire Strikes Back",
               texto: "The best of the series",
               título: "The best of the series",
               calificación: 5,
