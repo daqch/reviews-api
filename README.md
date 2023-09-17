@@ -20,7 +20,7 @@ Devuelve reseñas
   {
     "id": 1,
     "pélículaNombre": "A New Hope",
-    "puntuación": 5,
+    "calificación": 5,
     "texto": "Excelente película",
     "películaDirector": "George Lucas",
     "películaFechaEstreno": "1977-05-25",
@@ -35,7 +35,7 @@ Crea una reseña
 
 #### Parámetros del cuerpo
 
-- puntuación: puntuación de la reseña
+- calificación: puntuación de la reseña
 - texto: texto de la reseña
 - nombrePelicula: nombre de la película
 - título: título de la reseña
