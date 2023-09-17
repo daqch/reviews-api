@@ -34,7 +34,7 @@ functions:
     handler: src/lambdas/getReviews.handler
     events:
       - http:
-          path: reviews
+          path: reviews/{id}
           method: get
           cors: true
 
