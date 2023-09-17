@@ -56,3 +56,11 @@ Crea una reseña
   "título": "Una nueva esperanza para el cine"
 }
 ```
+
+# Testeo
+
+Para ejecutar los tests, correr el siguiente comando:
+
+```bash
+npm run test
+```
