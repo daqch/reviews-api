@@ -3,6 +3,7 @@ const Review = require("../src/model/Review");
 describe("clase Review", () => {
   test("constructor", () => {
     const review = new Review(
+      null,
       "películaTítulo",
       "texto",
       "título",
@@ -21,6 +22,7 @@ describe("clase Review", () => {
 
   test("fetchMovieDetails con película en swapi", async () => {
     const review = new Review(
+      null,
       "A New Hope",
       "texto",
       "título",
@@ -38,6 +40,7 @@ describe("clase Review", () => {
 
   test("fetchMovieDetails con película no en swapi", async () => {
     const review = new Review(
+      null,
       "películaTítulo",
       "texto",
       "título",
@@ -55,6 +58,7 @@ describe("clase Review", () => {
 
   test("toJSONReady", () => {
     const review = new Review(
+      null,
       "películaTítulo",
       "texto",
       "título",

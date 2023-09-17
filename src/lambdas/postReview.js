@@ -31,7 +31,7 @@ exports.handler = async (event) => {
 
   const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-  const review = new Review(películaTítulo, texto, título, calificación);
+  const review = new Review(null, películaTítulo, texto, título, calificación);
 
   const success = await review.fetchMovieDetails();
 
