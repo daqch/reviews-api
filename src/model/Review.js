@@ -2,6 +2,7 @@ const uuid = require("uuid");
 
 class Review {
   constructor(
+    id = null,
     películaTítulo,
     texto,
     título,
@@ -9,7 +10,7 @@ class Review {
     películaLanzamiento = null,
     películaDirector = null
   ) {
-    this.id = uuid.v4();
+    this.id = id || uuid.v4();
     this.películaTítulo = películaTítulo;
     this.texto = texto;
     this.título = título;
