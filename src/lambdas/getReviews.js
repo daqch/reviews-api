@@ -19,6 +19,15 @@ exports.handler = async (event) => {
 
   const result = await dynamoDb.scan(params).promise();
 
+  if (!id && (!result || !result.Items || !result.Items.length)) {
+    return {
+      statusCode: 404,
+      body: JSON.stringify({
+        message: "No se encontraron reviews",
+      }),
+    };
+  }
+
   const reviews = result.Items.map(
     (item) =>
       new Review(

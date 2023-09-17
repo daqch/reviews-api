@@ -1,72 +1,58 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Reseñas API
 
+## Uso
 
-# Serverless Framework AWS NodeJS Example
+### GET /reviews/:id
 
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+Devuelve reseñas
 
-## Usage
+#### Parámetros
 
-### Deployment
+- id: id de la reseña
 
-In order to deploy the example, you need to run the following command:
+#### Respuesta
 
-```
-$ serverless deploy
-```
+- 200: OK
+- 404: No se encontró la reseña
 
-After running deploy, you should see output similar to:
-
-```bash
-Deploying aws-node-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-project-dev (112s)
-
-functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
+```json
+[
+  {
+    "id": 1,
+    "pélículaNombre": "A New Hope",
+    "puntuación": 5,
+    "texto": "Excelente película",
+    "películaDirector": "George Lucas",
+    "películaFechaEstreno": "1977-05-25",
+    "título": "Una nueva esperanza para el cine"
+  }
+]
 ```
 
-### Invocation
+### POST /reviews
 
-After successful deployment, you can invoke the deployed function by using the following command:
+Crea una reseña
 
-```bash
-serverless invoke --function hello
-```
+#### Parámetros del cuerpo
 
-Which should result in response similar to the following:
+- puntuación: puntuación de la reseña
+- texto: texto de la reseña
+- nombrePelicula: nombre de la película
+- título: título de la reseña
+
+#### Respuesta
+
+- 201: Creado
+- 400: Parámetros inválidos
 
 ```json
 {
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
-}
-```
-
-### Local development
-
-You can invoke your function locally by using the following command:
-
-```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
-
-```
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
+  "id": 1,
+  "pélículaNombre": "A New Hope",
+  "puntuación": 5,
+  "texto": "Excelente película",
+  "películaDirector": "George Lucas",
+  "películaFechaEstreno": "1977-05-25",
+  "título": "Una nueva esperanza para el cine"
 }
 ```

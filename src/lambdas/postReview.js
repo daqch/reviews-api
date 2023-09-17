@@ -48,7 +48,7 @@ exports.handler = async (event) => {
 
   // return the review
   return {
-    statusCode: 200,
+    statusCode: 201,
     body: JSON.stringify(review.toJSONReady()),
   };
 };
