@@ -1,12 +1,9 @@
-// lambda to get all movies from swapi
 const AWS = require("aws-sdk");
 const Review = require("../model/Review");
 
 exports.handler = async (event) => {
   const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-  // it may be the case that the url was /reviews/:id
-  // so we need to check if the id is present
   const id = event.pathParameters ? event.pathParameters.id : null;
 
   const params = {
