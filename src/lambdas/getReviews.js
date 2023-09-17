@@ -19,7 +19,7 @@ exports.handler = async (event) => {
 
   const result = await dynamoDb.scan(params).promise();
 
-  if (!id && (!result || !result.Items || !result.Items.length)) {
+  if (id && (!result || !result.Items || !result.Items.length)) {
     return {
       statusCode: 404,
       body: JSON.stringify({
