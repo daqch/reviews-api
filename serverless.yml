@@ -1,0 +1,47 @@
+service: aws-node-project
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:156992321143:table/ReviewsTable"
+
+resources:
+  Resources:
+    ReviewsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ReviewsTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+functions:
+  getReviews:
+    handler: src/lambdas/getReviews.handler
+    events:
+      - http:
+          path: reviews
+          method: get
+          cors: true
+
+  postReview:
+    handler: src/lambdas/postReview.handler
+    events:
+      - http:
+          path: reviews
+          method: post
+          cors: true
