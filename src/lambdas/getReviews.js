@@ -6,12 +6,14 @@ exports.handler = async (event) => {
 
   const id = event.pathParameters ? event.pathParameters.id : null;
 
+  console.log("id", id);
+
   const params = {
     TableName: "ReviewsTable",
   };
 
   if (id) {
-    params.KeyConditionExpression = "id = :id";
+    params.FilterExpression = "id = :id";
     params.ExpressionAttributeValues = {
       ":id": id,
     };
