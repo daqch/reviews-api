@@ -1,6 +1,18 @@
 # Reseñas API
 
-## Uso
+## Tests
+
+Para correr los tests ejecutar el siguiente comando:
+
+```bash
+npm run test
+```
+
+## Ejecución
+
+Esta API utiliza la framework Serverless.
+
+# Documentación REST
 
 ### GET /reviews/:id
 
@@ -55,12 +67,4 @@ Crea una reseña
   "películaFechaEstreno": "1977-05-25",
   "título": "Una nueva esperanza para el cine"
 }
-```
-
-# Testeo
-
-Para ejecutar los tests, correr el siguiente comando:
-
-```bash
-npm run test
 ```
