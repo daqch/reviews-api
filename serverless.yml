@@ -1,4 +1,6 @@
-service: aws-node-project
+org: dmon33
+app: aws-node-api
+service: aws-node-api
 frameworkVersion: "3"
 
 provider:
@@ -20,7 +22,7 @@ resources:
     ReviewsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ReviewsTable
+        TableName: reviewsTable
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

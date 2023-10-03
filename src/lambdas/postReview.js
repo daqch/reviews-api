@@ -1,5 +1,5 @@
-const AWS = require("aws-sdk");
-const Review = require("../model/Review");
+const ReviewRepository = require("../model/Repositories/ReviewRepository");
+const Review = require("../model/Entities/Review");
 
 const validateParams = (películaTítulo, texto, título, calificación) => {
   if (
@@ -29,22 +29,20 @@ exports.handler = async (event) => {
     };
   }
 
-  const dynamoDb = new AWS.DynamoDB.DocumentClient();
-
   const review = new Review(null, películaTítulo, texto, título, calificación);
 
-  const success = await review.fetchMovieDetails();
+  const repo = new ReviewRepository();
 
-  console.log(`
-    Detalles de la película populados : ${success}
-  `);
+  const result = await repo.add(review);
 
-  const params = {
-    TableName: "ReviewsTable",
-    Item: review.toJSONReady(),
-  };
-
-  await dynamoDb.put(params).promise();
+  if (!result) {
+    return {
+      statusCode: 500,
+      body: {
+        error: "Error al subir reseña",
+      },
+    };
+  }
 
   // return the review
   return {

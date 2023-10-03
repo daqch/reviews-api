@@ -1,47 +1,11 @@
-const AWS = require("aws-sdk");
-const Review = require("../model/Review");
+const ReviewRepository = require("../model/Repositories/ReviewRepository");
 
 exports.handler = async (event) => {
-  const dynamoDb = new AWS.DynamoDB.DocumentClient();
+  const repo = new ReviewRepository();
 
   const id = event.pathParameters ? event.pathParameters.id : null;
 
-  console.log("id", id);
-
-  const params = {
-    TableName: "ReviewsTable",
-  };
-
-  if (id) {
-    params.FilterExpression = "id = :id";
-    params.ExpressionAttributeValues = {
-      ":id": id,
-    };
-  }
-
-  const result = await dynamoDb.scan(params).promise();
-
-  if (id && (!result || !result.Items || !result.Items.length)) {
-    return {
-      statusCode: 404,
-      body: JSON.stringify({
-        message: "No se encontraron reviews",
-      }),
-    };
-  }
-
-  const reviews = result.Items.map(
-    (item) =>
-      new Review(
-        item.id,
-        item.películaTítulo,
-        item.texto,
-        item.título,
-        item.calificación,
-        item.películaLanzamiento,
-        item.películaDirector
-      )
-  );
+  const reviews = id ? [await repo.findById(id)] : await repo.findAll();
 
   const JSONs = reviews.map((review) => review.toJSONReady());
 
